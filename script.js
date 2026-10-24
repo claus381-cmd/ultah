@@ -416,6 +416,10 @@ UI_MAP.forEach(([k, sel]) => {
   if (el) UI_ID[k] = el.innerHTML;
 });
 let jpMode = false;
+const psx = (a) =>
+  jpMode
+    ? (Array.isArray(a) ? a : [a]).map((t) => `<p>${t}</p>`).join("")
+    : ps(a);
 function setBahasa() {
   const T = jpMode ? TEKS_JP : TEKS,
     U = jpMode ? UI_JP : UI_ID;
@@ -423,10 +427,10 @@ function setBahasa() {
     const el = document.querySelector(sel);
     if (el && U[k] !== undefined) el.innerHTML = U[k];
   });
-  document.querySelector("#kamu .glass").innerHTML = ps(T.slide1);
+  document.querySelector("#kamu .glass").innerHTML = psx(T.slide1);
   document.querySelector("#surat .let").innerHTML = T.slide2;
-  document.querySelector("#pesan .glass").innerHTML = ps(T.pesan);
-  document.querySelector("#akhir .glass").innerHTML = ps(T.akhir);
+  document.querySelector("#pesan .glass").innerHTML = psx(T.pesan);
+  document.querySelector("#akhir .glass").innerHTML = psx(T.akhir);
   document.body.classList.toggle("jp", jpMode);
   document.getElementById("lang").textContent = jpMode ? "Indonesia" : "日本語";
 }

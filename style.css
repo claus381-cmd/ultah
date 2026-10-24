@@ -697,14 +697,11 @@ body.jp .btn {
   font-style: normal;
 }
 
-body.jp .w {
-  display: inline;
-  white-space: normal;
-}
 body.jp .glass,
 body.jp .let {
   line-break: strict;
   overflow-wrap: anywhere;
+  word-break: break-all;
 }
 body.jp h2 {
   font-size: clamp(26px, 8vw, 44px);
