@@ -20,7 +20,12 @@ const FOTO = [
 ]; // maks 10
 const VIDEO = ""; // contoh: "video/kenangan.mp4"
 
+const ASAL = "Jakarta",
+  TUJUAN = "Bandung"; // kota di slide peta (contoh, ganti sesuai kalian)
+const JUDUL_RUTE = "Kejutan kecil buat kamu";
+const JUDUL_RUTE_JP = "あなたへの小さなサプライズ";
 const TEKS = {
+  rute: ["Tulis kata-kata di sini (isi dari Kunyati)."],
   slide1: [
     "Hari ini adalah tentang kamu. Tentang satu tahun lagi yang berhasil kamu lewati, tentang semua hal yang sudah kamu lalui, dan tentang semua hal baik yang masih menunggu di depan.",
     "Semoga di umur yang baru ini, kamu selalu punya alasan untuk tersenyum dan selalu dikelilingi hal-hal yang membuat kamu bahagia.",
@@ -43,6 +48,7 @@ const TEKS = {
 };
 
 const TEKS_JP = {
+  rute: ["ここに言葉を書いてね。"],
   slide1: [
     "今日はあなたのための日。また一年を乗り越えたこと、これまで経験してきたすべてのこと、そしてこれから待っているたくさんの素敵なことのための日だよ。",
     "新しい年齢のあなたに、笑顔になれる理由がいつもありますように。そして、あなたを幸せにしてくれるものにいつも囲まれていますように。",
@@ -105,6 +111,25 @@ function kalender() {
   return `<div class="cal rise d1"><h3>${BLN[BULAN - 1]}</h3><div class="grid">${h}</div></div>`;
 }
 
+function peta() {
+  const path = "M70 205 C115 95 175 235 250 95";
+  const pin = (x, y) =>
+    `<g transform="translate(${x} ${y})"><path d="M0 0L-10 -15A15 15 0 1 1 10 -15Z" fill="#ff7aa2"/><text y="-17" text-anchor="middle" font-size="15" fill="#fff">♥</text></g>`;
+  let roads = "";
+  for (let i = 1; i < 7; i++)
+    roads += `<path d="M0 ${i * 43}H320"/><path d="M${i * 46} 0V300"/>`;
+  return `<svg class="peta" viewBox="0 0 320 300" role="img" aria-label="Peta ${ASAL} ke ${TUJUAN}">
+    <defs><mask id="mr"><path class="mp" d="${path}" pathLength="1" fill="none" stroke="#fff" stroke-width="10"/></mask></defs>
+    <rect width="320" height="300" rx="22" fill="#ffffff14"/>
+    <g stroke="#ffffff1f" stroke-width="2" fill="none">${roads}</g>
+    <path d="${path}" fill="none" stroke="#ffd27a" stroke-width="3" stroke-dasharray="2 9" stroke-linecap="round" mask="url(#mr)"/>
+    <text class="plane" x="149" y="161" font-size="26" text-anchor="middle" transform="rotate(-10 149 161)">✈</text>
+    ${pin(70, 205)}${pin(250, 95)}
+    <text x="70" y="229" text-anchor="middle" fill="#fff" font-size="15">${ASAL}</text>
+    <text x="250" y="119" text-anchor="middle" fill="#fff" font-size="15">${TUJUAN}</text>
+  </svg>`;
+}
+
 const pages = [];
 pages.push(
   sec(
@@ -165,6 +190,12 @@ if (VIDEO)
       `<h2 class="rise">Satu momen buat kamu</h2><video class="rise" src="${VIDEO}" controls playsinline></video>`,
     ),
   );
+pages.push(
+  sec(
+    "rute",
+    `<h2 class="rise">${JUDUL_RUTE}</h2><div class="rise d1">${peta()}</div><div class="glass rise d2">${ps(TEKS.rute)}</div>`,
+  ),
+);
 pages.push(
   sec(
     "pesan",
@@ -393,6 +424,7 @@ const UI_JP = {
   foto5: "あなたを見ていて飽きることはないよ",
   pesanH2: "あなたへの<br>メッセージ",
   rew: "最初から",
+  ruteH2: JUDUL_RUTE_JP,
   bulan: BULAN + "月",
 };
 const UI_ID = {};
@@ -408,6 +440,7 @@ const UI_MAP = [
   ["foto0", "#foto0 h2"],
   ["foto5", "#foto5 h2"],
   ["pesanH2", "#pesan h2"],
+  ["ruteH2", "#rute h2"],
   ["rew", "#rew"],
   ["bulan", "#kalender .cal h3"],
 ];
@@ -429,12 +462,21 @@ function setBahasa() {
   });
   document.querySelector("#kamu .glass").innerHTML = psx(T.slide1);
   document.querySelector("#surat .let").innerHTML = T.slide2;
+  document.querySelector("#rute .glass").innerHTML = psx(T.rute);
   document.querySelector("#pesan .glass").innerHTML = psx(T.pesan);
   document.querySelector("#akhir .glass").innerHTML = psx(T.akhir);
   document.body.classList.toggle("jp", jpMode);
-  document.getElementById("lang").textContent = jpMode ? "Indonesia" : "日本語";
+  document.getElementById("lang").textContent = jpMode
+    ? "🌐 Kembali ke Indonesia"
+    : "🌐 Translate 日本語";
 }
 document.getElementById("lang").onclick = () => {
   jpMode = !jpMode;
   setBahasa();
 };
+
+/* kalau file lagu tidak ditemukan, beri tahu di kartu lagu */
+song.addEventListener("error", () => {
+  const s = document.querySelector("#kalender .tt small");
+  if (s) s.textContent = "File lagu belum ditemukan";
+});
