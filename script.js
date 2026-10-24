@@ -391,7 +391,7 @@ const UI_JP = {
   suratH2: "小さな手紙",
   foto0: "あなたは私の夜の月",
   foto5: "あなたを見ていて飽きることはないよ",
-  pesanH2: "あなたへのメッセージ",
+  pesanH2: "あなたへの<br>メッセージ",
   rew: "最初から",
   bulan: BULAN + "月",
 };

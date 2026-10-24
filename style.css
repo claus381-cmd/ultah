@@ -696,3 +696,17 @@ body.jp .btn {
   font-family: "Noto Sans JP", sans-serif;
   font-style: normal;
 }
+
+body.jp .w {
+  display: inline;
+  white-space: normal;
+}
+body.jp .glass,
+body.jp .let {
+  line-break: strict;
+  overflow-wrap: anywhere;
+}
+body.jp h2 {
+  font-size: clamp(26px, 8vw, 44px);
+  line-height: 1.25;
+}
