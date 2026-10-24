@@ -333,17 +333,14 @@ document.querySelectorAll("section").forEach((s) => io.observe(s));
 
 /* musik + tombol */
 const song = document.getElementById("song"),
-  pp = document.getElementById("pp"),
   pp2 = document.getElementById("pp2");
 song.src = LAGU;
 const sync = () => {
-  const t = song.paused ? "▶" : "❚❚";
-  pp.textContent = t;
-  pp2.textContent = t;
+  pp2.textContent = song.paused ? "▶" : "❚❚";
   document.body.classList.toggle("playing", !song.paused);
 };
 song.onplay = song.onpause = sync;
-pp.onclick = pp2.onclick = () => (song.paused ? song.play() : song.pause());
+pp2.onclick = () => (song.paused ? song.play() : song.pause());
 document.getElementById("go").onclick = (e) => {
   const r = e.target.getBoundingClientRect();
   burst(r.left + r.width / 2, r.top + r.height / 2, 160);
