@@ -733,3 +733,12 @@ body.jp h2 {
 .in .peta .plane {
   opacity: 1;
 }
+
+/* lapisan langit dimatikan: sebelumnya bocor sebagai garis ungu/pink di bawah layar HP */
+#sky,
+#stars {
+  display: none;
+}
+html {
+  background: #1a1240;
+}
