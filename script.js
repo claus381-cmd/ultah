@@ -41,6 +41,28 @@ const TEKS = {
     "Selamat bertambah usia, sayang. Semoga tahun ini menjadi tahun yang baik untuk kamu, dan semoga aku masih bisa ada di banyak cerita kamu.",
   ],
 };
+
+const TEKS_JP = {
+  slide1: [
+    "今日はあなたのための日。また一年を乗り越えたこと、これまで経験してきたすべてのこと、そしてこれから待っているたくさんの素敵なことのための日だよ。",
+    "新しい年齢のあなたに、笑顔になれる理由がいつもありますように。そして、あなたを幸せにしてくれるものにいつも囲まれていますように。",
+  ],
+  slide2:
+    "言葉ではうまく伝えられないこともあるかもしれないけれど、あなたがそばにいてくれること、あなたの気遣い、そしてあなたがしてくれる小さなことのすべてを、私はいつも大切に思っています。あなたが思っている以上に、私にとってあなたは大切な存在です。",
+  pesan: [
+    "お誕生日おめでとう、大好きな人。私は自分の気持ちを上手に言葉にするのが得意ではないかもしれないけれど、今日は伝えたいの。あなたと出会えて、あなたの人生の一部になれて、本当に感謝しています。",
+    "これまでくれた時間も、お話も、気遣いも、小さな優しさも、ありがとう。中にはささいなことに見えるものもあるかもしれないけれど、私にとってはどれも意味のあるものです。",
+    "新しい一年、あなたが頑張っていることが、少しずつ道を見つけていきますように。いつも健康でいられますように。一歩一歩が順調に進みますように。そして、あなたを心から大切に思う人たちに囲まれていますように。",
+    "もし、つらいと感じる日があっても、すべてを一人で抱え込まなくていいことを忘れないで。私はいつもあなたのそばにいて、話を聞いて、寄り添って、できる限り支えられるように努力するよ。",
+    "これからも、新しい思い出を作ったり、新しい場所へ出かけたり、ささいなことで笑い合ったり、二人の思い出をもっとたくさん集めていける時間がありますように。",
+    "あなたが私の人生にいてくれて、本当に幸せです。",
+  ],
+  akhir: [
+    "私の人生に現れて、私にとってこんなにも大切な人になってくれて、ありがとう。",
+    "いつも幸せで、いつも元気で、あなたが願うことがひとつずつ叶っていきますように。",
+    "お誕生日おめでとう、大好きな人。今年があなたにとって良い一年になりますように。そして、これからもあなたの物語の中に、私がいられますように。",
+  ],
+};
 /* ====== SELESAI ====== */
 
 const BLN = [
@@ -355,4 +377,60 @@ document.getElementById("rew").onclick = () => {
   main.scrollTo({ top: 0 });
   song.currentTime = 0;
   song.play().catch(() => {});
+};
+
+/* ganti bahasa Indonesia <-> Jepang */
+const UI_JP = {
+  coverSub: "今日、また一つ年を重ねるあなたへ",
+  coverTitle: "お誕生日おめでとう、<br>" + NAMA,
+  go: "触れてみて",
+  tglSub: "大好きな人が生まれた日",
+  kalH2: "特別な日",
+  kalSub: "まずは音楽をつけてね！",
+  kamuH2: "今日はあなたの日",
+  suratH2: "小さな手紙",
+  foto0: "あなたは私の夜の月",
+  foto5: "あなたを見ていて飽きることはないよ",
+  pesanH2: "あなたへのメッセージ",
+  rew: "最初から",
+  bulan: BULAN + "月",
+};
+const UI_ID = {};
+const UI_MAP = [
+  ["coverSub", "#cover .sub"],
+  ["coverTitle", "#cover h2"],
+  ["go", "#go"],
+  ["tglSub", "#tgl .sub"],
+  ["kalH2", "#kalender h2"],
+  ["kalSub", "#kalender .sub"],
+  ["kamuH2", "#kamu h2"],
+  ["suratH2", "#surat h2"],
+  ["foto0", "#foto0 h2"],
+  ["foto5", "#foto5 h2"],
+  ["pesanH2", "#pesan h2"],
+  ["rew", "#rew"],
+  ["bulan", "#kalender .cal h3"],
+];
+UI_MAP.forEach(([k, sel]) => {
+  const el = document.querySelector(sel);
+  if (el) UI_ID[k] = el.innerHTML;
+});
+let jpMode = false;
+function setBahasa() {
+  const T = jpMode ? TEKS_JP : TEKS,
+    U = jpMode ? UI_JP : UI_ID;
+  UI_MAP.forEach(([k, sel]) => {
+    const el = document.querySelector(sel);
+    if (el && U[k] !== undefined) el.innerHTML = U[k];
+  });
+  document.querySelector("#kamu .glass").innerHTML = ps(T.slide1);
+  document.querySelector("#surat .let").innerHTML = T.slide2;
+  document.querySelector("#pesan .glass").innerHTML = ps(T.pesan);
+  document.querySelector("#akhir .glass").innerHTML = ps(T.akhir);
+  document.body.classList.toggle("jp", jpMode);
+  document.getElementById("lang").textContent = jpMode ? "Indonesia" : "日本語";
+}
+document.getElementById("lang").onclick = () => {
+  jpMode = !jpMode;
+  setBahasa();
 };

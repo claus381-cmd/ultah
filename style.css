@@ -9,7 +9,6 @@
   margin: 0;
   -webkit-tap-highlight-color: transparent;
 }
-
 button:focus {
   outline: none;
 }
@@ -661,4 +660,39 @@ video {
     animation-duration: 0.01s !important;
     transition-duration: 0.01s !important;
   }
+}
+
+/* tombol ganti bahasa */
+.lang {
+  position: fixed;
+  right: 14px;
+  top: calc(14px + env(safe-area-inset-top, 0px));
+  z-index: 40;
+  display: none;
+  padding: 9px 16px;
+  border-radius: 30px;
+  border: 1px solid #ffffff50;
+  background: #ffffff25;
+  color: #fff;
+  font:
+    500 14px "DM Sans",
+    "Noto Sans JP",
+    sans-serif;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+body.started .lang {
+  display: block;
+}
+body.jp {
+  font-family: "Noto Sans JP", "DM Sans", sans-serif;
+}
+body.jp h2,
+body.jp .let,
+body.jp .cal h3,
+body.jp .sun,
+body.jp .btn {
+  font-family: "Noto Sans JP", sans-serif;
+  font-style: normal;
 }
