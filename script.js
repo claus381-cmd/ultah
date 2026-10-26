@@ -268,3 +268,17 @@ document.querySelectorAll("video").forEach(v => {
   v.addEventListener("pause", lanjut);
   v.addEventListener("ended", lanjut);
 });
+
+let lagaJalan = false;
+document.addEventListener("play", e => {
+  if (e.target.tagName !== "VIDEO") return;
+  lagaJalan = !song.paused;
+  song.pause();
+}, true);
+const lanjutLagu = e => {
+  if (e.target.tagName !== "VIDEO") return;
+  if (lagaJalan) song.play().catch(() => {});
+  lagaJalan = false;
+};
+document.addEventListener("pause", lanjutLagu, true);
+document.addEventListener("ended", lanjutLagu, true);
