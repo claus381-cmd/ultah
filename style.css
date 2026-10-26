@@ -742,3 +742,35 @@ body.jp h2 {
 html {
   background: #1a1240;
 }
+
+/* teks Jepang boleh patah baris */
+body.jp .glass,body.jp .let{line-break:strict;overflow-wrap:anywhere;word-break:break-all}
+body.jp h2{font-size:clamp(26px,8vw,44px);line-height:1.25}
+
+/* slide peta */
+.peta{width:min(320px,88vw);height:auto;display:block}
+.peta .mp{stroke-dasharray:1;stroke-dashoffset:1}
+.in .peta .mp{animation:rdraw 2.4s .5s ease-in-out forwards}
+@keyframes rdraw{to{stroke-dashoffset:0}}
+.peta .plane{opacity:0;transition:opacity .6s 2.6s}
+.in .peta .plane{opacity:1}
+
+/* lapisan langit dimatikan (bocor di bawah layar HP) */
+#sky,#stars{display:none}
+html{background:#1a1240}
+
+/* tema navy seperti video referensi */
+:root{--gold:#ffe9a8;--rose:#cfe1ff;--lilac:#b9d4ff;--teal:#8fb4e6}
+html{background:#071a3d}
+body{background:transparent}
+body::before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:repeating-linear-gradient(45deg,#ffffff0a 0 2px,transparent 2px 30px),repeating-linear-gradient(-45deg,#ffffff0a 0 2px,transparent 2px 30px),linear-gradient(180deg,#0d2b5e,#071a3d 55%,#040c22)}
+#stars{display:block!important;opacity:1!important;z-index:-1}
+.sun{color:#0f2a52;background:radial-gradient(circle at 35% 30%,#fff,#cfe1ff 50%,#6fa6e8);box-shadow:0 0 60px #8fb4e6b0,0 0 140px #3a6fc0a0}
+.sun::before,.sun::after{border-color:#cfe1ff88}
+.env .back{background:#143868}
+.env .front{background:linear-gradient(160deg,#2a5fa8,#143868)}
+.env .flap{background:#1d4a8a}
+.env .let{color:#10213f}
+.btn,.pbtn{color:#0f2a52}
+.grid .hit{color:#0f2a52}
