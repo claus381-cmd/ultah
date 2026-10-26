@@ -249,3 +249,8 @@ song.addEventListener("error", () => {
   const s = document.querySelector("#kalender .tt small");
   if (s) s.textContent = "File lagu belum ditemukan";
 });
+
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) song.pause();
+});
+window.addEventListener("pagehide", () => song.pause());
