@@ -254,3 +254,14 @@ document.addEventListener("visibilitychange", () => {
   if (document.hidden) song.pause();
 });
 window.addEventListener("pagehide", () => song.pause());
+
+document.querySelectorAll("video").forEach(v => {
+  let lagaJalan = false;
+  v.addEventListener("play", () => {
+    lagaJalan = !song.paused;
+    song.pause();
+  });
+  v.addEventListener("ended", () => {
+    if (lagaJalan) song.play().catch(() => {});
+  });
+});
