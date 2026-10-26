@@ -257,11 +257,14 @@ window.addEventListener("pagehide", () => song.pause());
 
 document.querySelectorAll("video").forEach(v => {
   let lagaJalan = false;
+  const lanjut = () => {
+    if (lagaJalan) song.play().catch(() => {});
+    lagaJalan = false;
+  };
   v.addEventListener("play", () => {
     lagaJalan = !song.paused;
     song.pause();
   });
-  v.addEventListener("ended", () => {
-    if (lagaJalan) song.play().catch(() => {});
-  });
+  v.addEventListener("pause", lanjut);
+  v.addEventListener("ended", lanjut);
 });
