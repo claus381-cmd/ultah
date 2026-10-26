@@ -158,9 +158,10 @@ pages.push(
   sec(
     "kalender",
     `
-  <h2 class="rise">Tanggal spesial kamu</h2>${kalender()}
-  <p class="sub rise d2">Nyalakan musiknya dulu ya!</p>
-  <<div class="ytbox rise d3"><iframe src="https://www.youtube-nocookie.com/embed/${YT_ID}?playsinline=1&rel=0&modestbranding=1&loop=1&playlist=${YT_ID}" title="${JUDUL_LAGU} - ${PENYANYI}" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe><p>${JUDUL_LAGU} · ${PENYANYI}</p></div>`,
+    <h2 class="rise">Tanggal spesial kamu</h2>${kalender()}
+    <p class="sub rise d2">Nyalakan musiknya dulu ya!</p>
+    <div class="ytbox rise d3"><iframe src="https://www.youtube-nocookie.com/embed/${YT_ID}?playsinline=1&rel=0&modestbranding=1&loop=1&playlist=${YT_ID}" title="${JUDUL_LAGU} - ${PENYANYI}" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe><p>${JUDUL_LAGU} · ${PENYANYI}</p></div>`,
+  ),
 );
 pages.push(
   sec(
