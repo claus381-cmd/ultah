@@ -4,8 +4,8 @@ const TAHUN = 2026,
   BULAN = 10,
   HARI = 28; // BULAN: 1-12
 const YT_ID = "ZnOAK04tJhc";
-const JUDUL_LAGU = "I Lay My Love on You", PENYANYI = "Westlife";
-  PENYANYI = "Penyanyi";
+const JUDUL_LAGU = "I Lay My Love on You", 
+      PENYANYI = "Westlife";
 const FOTO = [
   "foto/1.jpg",
   "foto/2.jpg",
