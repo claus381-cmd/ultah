@@ -1,20 +1,19 @@
 /* ====== ISI BAGIAN INI ====== */
-const NAMA    = "Nama";
+const NAMA = "sayang";
 const TAHUN   = 2026, BULAN = 10, HARI = 28;      // BULAN: 1-12
 const LAGU    = "lagu/lagu.mp3";
 const JUDUL_LAGU = "Judul lagu", PENYANYI = "Penyanyi";
-const FOTO    = ["foto/1.jpg","foto/2.jpg","foto/3.jpg","foto/4.jpg","foto/5.jpg",
-                 "foto/6.jpg","foto/7.jpg","foto/8.jpg","foto/9.jpg","foto/10.jpg"]; // maks 10
+const FOTO = ["foto/1.jpg","foto/2.jpg","foto/3.jpg","foto/4.jpg","foto/5.jpg","foto/6.jpg"]; // maks 6
 const UMUR = 20;
 const FOTO_PIN_A = "foto/pin-a.jpg", FOTO_PIN_B = "foto/pin-b.jpg"; // foto di peta (sisi Indonesia, sisi Jepang)
-const VIDEO   = "";                               // contoh: "video/kenangan.mp4"
+const VIDEO = "video/kenangan.mp4";
 
 const ASAL = "Indonesia", TUJUAN = "Jepang";
 const ASAL_JP = "インドネシア", TUJUAN_JP = "日本";
 const JUDUL_RUTE = "Kejutan kecil buat kamu";
 const JUDUL_RUTE_JP = "あなたへの小さなサプライズ";
 const TEKS = {
-  rute: ["Tulis kata-kata di sini (isi dari Kunyati)."],
+  rute: ["Meskipun jarak dan perbedaan zona waktu sering kali membatasi kita untuk merayakan hari spesial ini secara langsung, rasa sayang dan doaku selalu sampai untukmu tanpa berkurang sedikit pun. Selamat ulang tahun; terima kasih sudah terus bertahan, saling percaya, dan membuktikan bahwa ruang yang membentang di antara kita tidak pernah cukup jauh untuk menandingi eratnya hubungan kita."],
   slide1: [
     "Hari ini adalah tentang kamu. Tentang satu tahun lagi yang berhasil kamu lewati, tentang semua hal yang sudah kamu lalui, dan tentang semua hal baik yang masih menunggu di depan.",
     "Semoga di umur yang baru ini, kamu selalu punya alasan untuk tersenyum dan selalu dikelilingi hal-hal yang membuat kamu bahagia."
@@ -36,7 +35,7 @@ const TEKS = {
 };
 
 const TEKS_JP = {
-  rute: ["ここに言葉を書いてね。"],
+  rute: ["距離や時差のせいで、この特別な日を直接一緒にお祝いできないことが多いけれど、私の愛と祈りはいつも少しも減ることなくあなたに届いています。お誕生日おめでとう。ずっと耐えて、信じ合って、私たちの間に広がる距離が、私たちの絆の強さにはとても及ばないことを証明してくれて、ありがとう。"],
   slide1: [
     "今日はあなたのための日。また一年を乗り越えたこと、これまで経験してきたすべてのこと、そしてこれから待っているたくさんの素敵なことのための日だよ。",
     "新しい年齢のあなたに、笑顔になれる理由がいつもありますように。そして、あなたを幸せにしてくれるものにいつも囲まれていますように。"
@@ -109,13 +108,13 @@ pages.push(sec("kamu", `<h2 class="rise">Hari ini tentang kamu</h2><div class="g
 pages.push(sec("surat", `
   <h2 class="rise">Ada surat kecil</h2>
   <div class="env rise"><div class="back"></div><div class="let">${TEKS.slide2}</div><div class="front"></div><div class="flap"></div></div>`));
-for(let i=0; i<FOTO.length; i+=5){
+for(let i=0; i<FOTO.length; i+=6){
   pages.push(sec("foto"+i, `
     <h2 class="rise">${i===0 ? "Kamu bulan di malam-malamku" : "Aku nggak pernah bosan lihat kamu"}</h2>
-    <div class="deck rise" data-src='${JSON.stringify(FOTO.slice(i,i+5))}' data-n="${i}"></div>
+    <div class="deck rise" data-src='${JSON.stringify(FOTO.slice(i,i+6))}' data-n="${i}"></div>
     <p class="hint">ketuk fotonya</p>`));
 }
-if(VIDEO) pages.push(sec("video", `<h2 class="rise">Satu momen buat kamu</h2><video class="rise" src="${VIDEO}" controls playsinline></video>`));
+if(VIDEO) pages.push(sec("video", `<h2 class="rise">Satu momen buat kamu</h2><video class="rise" src="${VIDEO}" controls playsinline preload="metadata"></video>`));
 pages.push(sec("rute", `<h2 class="rise">${JUDUL_RUTE}</h2><div class="rise d1">${peta()}</div><div class="glass rise d2">${ps(TEKS.rute)}</div>`));
 pages.push(sec("pesan", `<h2 class="rise">Pesan buat kamu</h2><div class="glass">${ps(TEKS.pesan)}</div>`));
 pages.push(sec("akhir", `
@@ -142,7 +141,7 @@ function paintSky(){
   sc.fillStyle = g; sc.fillRect(0,0,sky.width,sky.height);
   stars.style.opacity = Math.min(1, p / 2.2);
 }
-main.addEventListener("scroll", paintSky, {passive:true}); addEventListener("resize", paintSky); paintSky();
+addEventListener("resize", paintSky); paintSky();
 
 /* balon */
 const bw = document.getElementById("balloons"), BC = ["#8fb4e6","#cfe1ff","#6fa6e8","#ffffff","#b9d4ff"];
@@ -208,7 +207,7 @@ const UI_JP = {
   umurTxt: UMUR + "歳になったね",
   asal: ASAL_JP,
   tujuan: TUJUAN_JP,
-  coverTitle: "お誕生日おめでとう、<br>" + NAMA,
+  coverTitle: "お誕生日おめでとう、<br>大好きな人",
   go: "触れてみて",
   tglSub: "大好きな人が生まれた日",
   kalH2: "特別な日",
@@ -219,6 +218,7 @@ const UI_JP = {
   foto5: "あなたを見ていて飽きることはないよ",
   pesanH2: "あなたへの<br>メッセージ",
   rew: "最初から",
+  videoH2: "あなたのための一瞬",
   ruteH2: JUDUL_RUTE_JP,
   bulan: BULAN + "月"
 };
@@ -226,7 +226,7 @@ const UI_ID = {};
 const UI_MAP = [
   ["coverSub", "#cover .sub"], ["umurTxt", "#umurTxt"], ["asal", ".lbA"], ["tujuan", ".lbB"], ["coverTitle", "#cover h2"], ["go", "#go"], ["tglSub", "#tgl .sub"],
   ["kalH2", "#kalender h2"], ["kalSub", "#kalender .sub"], ["kamuH2", "#kamu h2"], ["suratH2", "#surat h2"],
-  ["foto0", "#foto0 h2"], ["foto5", "#foto5 h2"], ["pesanH2", "#pesan h2"], ["ruteH2", "#rute h2"], ["rew", "#rew"], ["bulan", "#kalender .cal h3"]
+  ["foto0", "#foto0 h2"], ["foto5", "#foto5 h2"], ["pesanH2", "#pesan h2"], ["ruteH2", "#rute h2"], ["rew", "#rew"], ["videoH2", "#video h2"], ["bulan", "#kalender .cal h3"]
 ];
 UI_MAP.forEach(([k, sel]) => { const el = document.querySelector(sel); if (el) UI_ID[k] = el.innerHTML; });
 let jpMode = false;

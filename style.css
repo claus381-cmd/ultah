@@ -774,3 +774,11 @@ body::before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
 .env .let{color:#10213f}
 .btn,.pbtn{color:#0f2a52}
 .grid .hit{color:#0f2a52}
+
+/* mode ringan: kurangi beban gambar ulang di HP */
+.glass,.cal,.player,.lang{backdrop-filter:none;-webkit-backdrop-filter:none}
+.glass,.cal,.player{background:#12356be0;border-color:#ffffff30}
+.lang{background:#12356bf0}
+#stars{animation:none!important}
+.w{filter:none!important}
+.sun{box-shadow:0 0 40px #8fb4e6b0}
