@@ -213,7 +213,7 @@ pages.push(
     "akhir",
     `
   <div class="heart rise">♥</div>
-  <div class="glass">${ps(TEKS.akhir)}</div><div class="qrbox"><img src="foto/qr-ultah.png" alt="QR ke website"><p>atau scan QR ini</p></div>
+  <div class="glass">${ps(TEKS.akhir)}</div>
   <button class="btn rise" id="rew">Mulai dari awal</button>`,
   ),
 );
