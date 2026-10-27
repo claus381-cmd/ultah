@@ -199,7 +199,7 @@ if (VIDEO)
 pages.push(
   sec(
     "rute",
-    `<h2 class="rise">${JUDUL_RUTE}</h2><div class="rise d1"><div class="rute"><div id="petaKota" class="petakota"></div><div id="petaJepang" class="petakota"></div></div></div><div class="glass rise d2">${ps(TEKS.rute)}</div>`,
+    `<h2 class="rise">${JUDUL_RUTE}</h2><div class="rise d1"><div id="petaSatu" class="petasatu"></div></div><div class="glass rise d2">${ps(TEKS.rute)}</div>`,
   ),
 );
 pages.push(
