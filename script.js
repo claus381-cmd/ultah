@@ -282,3 +282,28 @@ const lanjutLagu = e => {
 };
 document.addEventListener("pause", lanjutLagu, true);
 document.addEventListener("ended", lanjutLagu, true);
+
+function lonLatKeTile(lat, lon, z) {
+  const n = 2 ** z;
+  const tx = (lon + 180) / 360 * n;
+  const ty = (1 - Math.log(Math.tan(lat * Math.PI / 180) + 1 / Math.cos(lat * Math.PI / 180)) / Math.PI) / 2 * n;
+  return { tx, ty };
+}
+
+function petaKota(id, lat, lon, label, z = 15) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const { tx, ty } = lonLatKeTile(lat, lon, z);
+  const x0 = Math.floor(tx), y0 = Math.floor(ty);
+  const w = el.clientWidth || 330, h = el.clientHeight || 260;
+  let html = "";
+  for (let dy = -1; dy <= 1; dy++) {
+    for (let dx = -1; dx <= 1; dx++) {
+      const x = x0 + dx, y = y0 + dy;
+      const left = w / 2 + (x - tx) * 256;
+      const top = h / 2 + (y - ty) * 256;
+      html += `<img src="https://basemaps.cartocdn.com/rastertiles/voyager/${z}/${x}/${y}.png" alt="" style="left:${left}px;top:${top}px">`;
+    }
+  }
+  el.innerHTML = html + `<div class="pinkota">${label}</div><div class="atrib">© OpenStreetMap · © CARTO</div>`;
+}
