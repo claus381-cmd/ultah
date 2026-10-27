@@ -199,7 +199,7 @@ if (VIDEO)
 pages.push(
   sec(
     "rute",
-    `<h2 class="rise">${JUDUL_RUTE}</h2><div class="rise d1">${peta()}</div><div class="glass rise d2">${ps(TEKS.rute)}</div>`,
+    `<h2 class="rise">${JUDUL_RUTE}</h2><div class="rise d1"><div class="petawrap"><div id="petaKota" class="petakota"></div><div id="petaJepang" class="petakota"></div></div></div><div class="glass rise d2">${ps(TEKS.rute)}</div>`,
   ),
 );
 pages.push(
@@ -545,9 +545,10 @@ function lonLatKeTile(lat, lon, z) {
   return { tx, ty };
 }
 
-function petaKota(id, lat, lon, label, z = 15, style = "rastertiles/voyager") {
+function petaKota(id, lat, lon, label, z = 15, gelap = false) {
   const el = document.getElementById(id);
   if (!el) return;
+  el.classList.toggle("gelap", gelap);
   const { tx, ty } = lonLatKeTile(lat, lon, z);
   const x0 = Math.floor(tx),
     y0 = Math.floor(ty);
@@ -560,13 +561,13 @@ function petaKota(id, lat, lon, label, z = 15, style = "rastertiles/voyager") {
         y = y0 + dy;
       const left = w / 2 + (x - tx) * 256;
       const top = h / 2 + (y - ty) * 256;
-      html += `<img src="https://basemaps.cartocdn.com/${style}/${z}/${x}/${y}.png" alt="" style="left:${left}px;top:${top}px">`;
+      html += `<img src="https://tile.openstreetmap.org/${z}/${x}/${y}.png" alt="" style="left:${left}px;top:${top}px">`;
     }
   }
   el.innerHTML =
     html +
-    `<div class="pinkota">${label}</div><div class="atrib">© OpenStreetMap · © CARTO</div>`;
+    `<div class="pinkota">${label}</div><div class="atrib">© OpenStreetMap contributors</div>`;
 }
 
 petaKota("petaKota", -6.1990, 106.2270, "Petir, Serang");
-petaKota("petaJepang", 35.1815, 136.9066, "Nagoya", 15, "dark_all");
+petaKota("petaJepang", 35.1815, 136.9066, "Nagoya", 15, true);
