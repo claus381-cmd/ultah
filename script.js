@@ -2,7 +2,7 @@
 const NAMA = "sayang";
 const TAHUN   = 2026, BULAN = 10, HARI = 28;      // BULAN: 1-12
 const LAGU    = "lagu/lagu.mp3";
-const JUDUL_LAGU = "Judul lagu", PENYANYI = "Penyanyi";
+const JUDUL_LAGU = "I Lay My Love on You", PENYANYI = "Westlife";
 const FOTO = ["foto/1.jpg","foto/2.jpg","foto/3.jpg","foto/4.jpg","foto/5.jpg","foto/6.jpg"]; // maks 6
 const UMUR = 20;
 const FOTO_PIN_A = "foto/pin-a.jpg", FOTO_PIN_B = "foto/pin-b.jpg"; // foto di peta (sisi Indonesia, sisi Jepang)
@@ -307,3 +307,5 @@ function petaKota(id, lat, lon, label, z = 15) {
   }
   el.innerHTML = html + `<div class="pinkota">${label}</div><div class="atrib">© OpenStreetMap · © CARTO</div>`;
 }
+
+petaKota("petaKota", -6.1990, 106.2270, "Petir, Serang");
