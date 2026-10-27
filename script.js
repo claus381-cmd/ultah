@@ -199,7 +199,7 @@ if (VIDEO)
 pages.push(
   sec(
     "rute",
-    `<h2 class="rise">${JUDUL_RUTE}</h2><div class="rise d1"><div class="petawrap"><div id="petaKota" class="petakota"></div><div id="petaJepang" class="petakota"></div></div></div><div class="glass rise d2">${ps(TEKS.rute)}</div>`,
+    `<h2 class="rise">${JUDUL_RUTE}</h2><div class="rise d1"><div class="rute"><div id="petaKota" class="petakota"></div><div id="petaJepang" class="petakota"></div></div></div><div class="glass rise d2">${ps(TEKS.rute)}</div>`,
   ),
 );
 pages.push(
@@ -571,3 +571,31 @@ function petaKota(id, lat, lon, label, z = 15, gelap = false) {
 
 petaKota("petaKota", -6.1990, 106.2270, "Petir, Serang");
 petaKota("petaJepang", 35.1815, 136.9066, "Nagoya", 15, true);
+
+function petaSatu(id, kiri, kanan) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const w = el.clientWidth || 330, h = el.clientHeight || 260;
+  const bagian = (p, sisi) => {
+    const { tx, ty } = lonLatKeTile(p.lat, p.lon, 15);
+    const x0 = Math.floor(tx), y0 = Math.floor(ty);
+    let tiles = "";
+    for (let dy = -1; dy <= 1; dy++) {
+      for (let dx = -1; dx <= 1; dx++) {
+        const x = x0 + dx, y = y0 + dy;
+        const left = w / 4 + (x - tx) * 256;
+        const top = h / 2 + (y - ty) * 256;
+        tiles += `<img class="tile" src="https://tile.openstreetmap.org/15/${x}/${y}.png" alt="" style="left:${left}px;top:${top}px">`;
+      }
+    }
+    return `<div class="sisi ${sisi}">${tiles}<div class="pinfoto"><img src="${p.foto}" alt=""></div><div class="pinkota">${p.label}</div></div>`;
+  };
+  const cxL = w / 4, cxR = (3 * w) / 4, cy = h / 2;
+  const rute = `<svg viewBox="0 0 ${w} ${h}"><path d="M${cxL} ${cy} Q ${w / 2} ${h * 0.12} ${cxR} ${cy}" fill="none" stroke="#2b2b2b" stroke-width="2.5" stroke-dasharray="2 6" stroke-linecap="round"/><text x="${w / 2}" y="${h * 0.2}" font-size="22" text-anchor="middle">✈</text></svg>`;
+  el.innerHTML = bagian(kiri, "kiri") + bagian(kanan, "kanan") + rute + `<div class="atrib">© OpenStreetMap contributors</div>`;
+}
+
+petaSatu("petaSatu",
+  { lat: -6.1990, lon: 106.2270, label: "Petir, Serang", foto: FOTO_PIN_A },
+  { lat: 35.1815, lon: 136.9066, label: "Nagoya", foto: FOTO_PIN_B }
+);

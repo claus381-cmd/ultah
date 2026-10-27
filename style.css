@@ -928,3 +928,95 @@ body::before {
 .petakota.gelap img {
   filter: invert(1) hue-rotate(180deg) brightness(0.9);
 }
+
+.petasatu {
+  position: relative;
+  overflow: hidden;
+  width: min(330px, 88vw);
+  height: 260px;
+  border-radius: 16px;
+  margin: 18px auto;
+  background: #f2efe9;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+.petasatu .sisi {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+}
+.petasatu .kiri {
+  left: 0;
+}
+.petasatu .kanan {
+  left: 50%;
+}
+.petasatu .tile {
+  position: absolute;
+  width: 256px;
+  height: 256px;
+  max-width: none;
+}
+.petasatu .kiri .tile {
+  filter: sepia(0.35) saturate(0.7);
+}
+.petasatu .kanan .tile {
+  filter: invert(1) hue-rotate(180deg) brightness(0.85);
+}
+.petasatu .pinfoto {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -100%);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+.petasatu .pinfoto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.petasatu .pinkota {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, 8px);
+  background: #7a1f2b;
+  color: #fff;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.petasatu svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.petasatu::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #7a1f2b;
+  opacity: 0.5;
+}
+.petasatu .atrib {
+  position: absolute;
+  right: 6px;
+  bottom: 4px;
+  font-size: 10px;
+  color: #333;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 1px 4px;
+  border-radius: 4px;
+}
