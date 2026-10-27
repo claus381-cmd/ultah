@@ -961,9 +961,11 @@ body::before {
 .petasatu .kiri .tile {
   filter: sepia(0.35) saturate(0.7);
 }
-.petasatu .kanan .tile {
-  filter: invert(1) hue-rotate(180deg) brightness(0.85);
+
+.petasatu .kiri .tile {
+  filter: sepia(0.6) saturate(0.5) brightness(1.02);
 }
+
 .petasatu .pinfoto {
   position: absolute;
   left: 50%;
